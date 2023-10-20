@@ -1,0 +1,33 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model Mares {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  day        String
+  date       DateTime
+  hour1      String
+  height1    String
+  hour2      String
+  height2    String
+  hour3      String
+  height3    String
+  hour4      String?
+  height4    String?
+  location   Location @relation(fields: [locationId], references: [id])
+  locationId String   @db.ObjectId
+}
+
+model Location {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  uf   String 
+  city String
+  mares Mares[]
+}
