@@ -12,8 +12,7 @@ export class MaresController {
 
   @Get('/today')
   getMareByDate() {
-    const date = new Date();
-    return this.maresService.listMaresToday(date);
+    return this.maresService.listMaresToday();
   }
 
   @Get('/maresByLocation/:id')

@@ -15,12 +15,14 @@ export class MaresService {
     return { mares };
   }
 
-  async listMaresToday(date: Date) {
-    return await this.prisma.mares.findFirst({
+  async listMaresToday() {
+    const mare = await this.prisma.mares.findFirst({
       where: {
-        date: dayjs(date).format('DD/MM/YYYY'),
+        date: new Date(),
       },
     });
+
+    return { mare };
   }
 
   async listLocationsMares() {
