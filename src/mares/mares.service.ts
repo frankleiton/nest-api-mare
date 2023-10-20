@@ -16,9 +16,14 @@ export class MaresService {
   }
 
   async listMaresToday() {
+    const dateStart = dayjs().startOf('day');
+    const dateEnd = dayjs().endOf('day');
     const mare = await this.prisma.mares.findFirst({
       where: {
-        date: new Date(),
+        date: {
+          gte: dateStart.toISOString(),
+          lte: dateEnd.toISOString(),
+        },
       },
     });
 
